@@ -87,7 +87,7 @@ export default function RegisterPage() {
   
           <button
             type="submit"
-            className="curosr-pointer w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700"
+            className="cursor-pointer w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700"
           >
             Sign Up
           </button>
