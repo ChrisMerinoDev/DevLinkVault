@@ -1,8 +1,11 @@
+import { connectToDatabase } from "@/lib/mongoose";
+import DashboardPage from "./dashboard/page";
 
-export default function Home() {
+export default async function Home() {
+  await connectToDatabase();
+  console.log("Connected to MongoDB ✅")
+  
   return (
-    <div className="flex justify-center p-8 text-2xl font-bold">
-      Tailwind v4 is working
-    </div>
+    <DashboardPage />
   );
 }
