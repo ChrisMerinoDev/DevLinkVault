@@ -6,7 +6,7 @@ export default function Home() {
           Welcome to DevLinkVault
         </h1>
         <p className="text-lg text-gray-600">
-          Effortlessly manage and share your developer links with the world.
+          Effortlessly manage and share your developer links with the world. 🌎
         </p>
 
         <div className="flex justify-center gap-4 mt-6">
