@@ -67,9 +67,9 @@ export default function ProfilePage() {
       return;
     }
 
-    if (file.size > 5 * 1024 * 1024) {
-      // Optional 5MB soft limit (can raise to 30MB if your backend allows)
-      setError("Image file too large (max 5MB).");
+    if (file.size > 30 * 1024 * 1024) {
+      // Optional 30MB soft limit (can raise to 30MB if your backend allows)
+      setError("Image file too large (max 30MB).");
       return;
     }
 
@@ -138,16 +138,13 @@ export default function ProfilePage() {
           {avatar && (
             <div className="flex w-20 h-20 mt-2.5">
               <Image
-                src={
-                  avatar.startsWith("/")
-                    ? `${process.env.NEXT_PUBLIC_BASE_URL}${avatar}`
-                    : avatar
-                }
-                alt="User avatar"
+                src={avatar}
+                alt={username}
                 width={80}
                 height={80}
                 className="rounded-full object-cover border border-gray-300 shadow-md"
               />
+
             </div>
           )}
 
