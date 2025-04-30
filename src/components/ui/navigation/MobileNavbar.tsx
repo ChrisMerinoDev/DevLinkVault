@@ -34,17 +34,17 @@ export default function MobileNavbar() {
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex justify-between items-center px-8 py-4">
+        <div className="flex justify-between items-center px-8 py-4 border-b-2 border-indigo-50">
           <h2 className="text-2xl font-bold text-indigo-700">DevLinkVault</h2>
           <button onClick={() => setIsOpen(false)}>
           </button>
         </div>
 
-        <ul className="flex flex-col gap-6 px-8 py-4 text-indigo-500 hover:text-indigo-600 text-lg">
+        <ul className="flex flex-col gap-6 py-6 items-center text-indigo-500 hover:text-indigo-600 text-lg border-b-2 border-indigo-50">
           <li>
             <Link
               href="/dashboard"
-              className={pathname === "/dashboard" ? "text-indigo-600 font-bold" : ""}
+              className={pathname === "/dashboard" ? "text-indigo-600 font-bold bg-indigo-100 px-13 py-4 rounded-2xl shadow-sm" : ""}
               onClick={() => setIsOpen(false)}
             >
               Dashboard
@@ -53,7 +53,7 @@ export default function MobileNavbar() {
           <li>
             <Link
               href={`/user/${username}`}
-              className={pathname === `/user/${username}` ? "text-indigo-600 font-bold" : ""}
+              className={pathname === `/user/${username}` ? "text-indigo-600 font-bold bg-indigo-100 px-17 py-4 rounded-2xl shadow-sm" : ""}
               onClick={() => setIsOpen(false)}
             >
               Profile
@@ -62,7 +62,7 @@ export default function MobileNavbar() {
           <li>
             <Link
               href="/links"
-              className={pathname === "/links" ? "text-indigo-600 font-bold" : ""}
+              className={pathname === "/links" ? "text-indigo-600 font-bold bg-indigo-100 px-15 py-4 rounded-2xl shadow-sm" : ""}
               onClick={() => setIsOpen(false)}
             >
               My Links

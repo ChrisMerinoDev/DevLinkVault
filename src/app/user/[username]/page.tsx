@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function PublicProfilePage({ params }: any) {
-  const { username } = params;
+  const { username } = await params;
 
   await connectToDatabase();
   const user = await User.findOne({ username }).select('username avatar bio');

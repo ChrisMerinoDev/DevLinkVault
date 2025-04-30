@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import path from "path";
+import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 
 import { verifyToken } from "@/lib/auth";
@@ -25,13 +26,11 @@ export async function PUT(req: Request) {
     await connectToDatabase();
 
     const contentType = req.headers.get("content-type");
-
     if (!contentType?.includes("multipart/form-data")) {
       return NextResponse.json({ error: "Unsupported content type" }, { status: 415 });
     }
 
     const formData = await req.formData();
-
     const username = formData.get("username")?.toString() || "";
     const bio = formData.get("bio")?.toString() || "";
     let avatarUrl = "";
@@ -39,19 +38,33 @@ export async function PUT(req: Request) {
     const file = formData.get("avatar") as File | null;
 
     if (file && typeof file === "object") {
+      if (!file.type.startsWith("image/")) {
+        return NextResponse.json({ error: "Only image files are allowed" }, { status: 415 });
+      }
+
+      if (file.size > 30 * 1024 * 1024) {
+        return NextResponse.json({ error: "File too large (max 30MB)" }, { status: 413 });
+      }
+
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
       const filename = `${uuidv4()}-${file.name}`;
-      const filepath = path.join(process.cwd(), "public/uploads", filename);
+
+      const uploadDir = path.join(process.cwd(), "public/uploads");
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+
+      const filepath = path.join(uploadDir, filename);
       await writeFile(filepath, buffer);
       avatarUrl = `/uploads/${filename}`;
     }
 
     type UpdateFields = Partial<{
-        username: string;
-        bio: string;
-        avatar: string;
-      }>;
+      username: string;
+      bio: string;
+      avatar: string;
+    }>;
 
     const updatedFields: UpdateFields = {
       username,

@@ -10,10 +10,11 @@ export default function ProfilePage() {
 
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState("");
-  const [avatar, setAvatar] = useState(""); // for preview + final display
-  const [avatarFile, setAvatarFile] = useState<File | null>(null); // raw file for upload
+  const [avatar, setAvatar] = useState(""); // URL for preview
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -45,7 +46,6 @@ export default function ProfilePage() {
     fetchProfile();
   }, [router]);
 
-  // ⚠️ prevent memory leaks when previewing multiple images
   useEffect(() => {
     return () => {
       if (avatarFile) {
@@ -60,26 +60,33 @@ export default function ProfilePage() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setAvatarFile(file);
-      const tempUrl = URL.createObjectURL(file);
-      setAvatar(tempUrl);
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setError("Only image files are allowed.");
+      return;
     }
+
+    if (file.size > 5 * 1024 * 1024) {
+      // Optional 5MB soft limit (can raise to 30MB if your backend allows)
+      setError("Image file too large (max 5MB).");
+      return;
+    }
+
+    setError("");
+    setAvatarFile(file);
+    setAvatar(URL.createObjectURL(file));
   };
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const token = localStorage.getItem("token");
     if (!token) return;
 
     const formData = new FormData();
     formData.append("username", username);
     formData.append("bio", bio);
-
-    if (avatarFile) {
-      formData.append("avatar", avatarFile);
-    }
+    if (avatarFile) formData.append("avatar", avatarFile);
 
     const res = await fetch("/api/user/update", {
       method: "PUT",
@@ -93,10 +100,12 @@ export default function ProfilePage() {
 
     if (!res.ok) {
       console.error(data.error || "Update failed");
+      setError(data.error || "Something went wrong updating your profile.");
       return;
     }
 
-    setAvatar(data.user.avatar); // refresh preview with final URL
+    setAvatar(data.user.avatar); // final URL
+    setAvatarFile(null);
     setSuccessMessage("Profile updated successfully!");
 
     setTimeout(() => {
@@ -113,45 +122,45 @@ export default function ProfilePage() {
       <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200 space-y-6">
         <h1>Edit Your Profile</h1>
 
-        <div className="space-y-3 flex-col justify-items-center">
-            <label className="block text-sm font-medium text-gray-700">Profile picture</label>
+        <div className="space-y-3">
+          <label className="block text-sm font-medium text-gray-700">
+            Profile picture
+          </label>
 
-          
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="hidden"
+          />
 
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              className="hidden"
-            />
-
-            {avatar && (
-                <div className="justify-items-center">
-              <div className="flex w-20 h-20 mt-2.5">
-                <Image
-                  src={avatar.startsWith('/')
+          {avatar && (
+            <div className="flex w-20 h-20 mt-2.5">
+              <Image
+                src={
+                  avatar.startsWith("/")
                     ? `${process.env.NEXT_PUBLIC_BASE_URL}${avatar}`
-                    : avatar}
-                  alt="User avatar"
-                  width={80}
-                  height={80}
-                  priority={true}
-                  className="rounded-full object-cover border border-gray-300 shadow-md"
-                />
-              </div>
-                    {/* <p className="text-md font-medium mt-3">Image Preview</p> */}
+                    : avatar
+                }
+                alt="User avatar"
+                width={80}
+                height={80}
+                className="rounded-full object-cover border border-gray-300 shadow-md"
+              />
             </div>
-            )}
+          )}
 
-            <button
-              type="button"
-              onClick={handleClickUpload}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition cursor-pointer"
-            >
-              Choose File
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={handleClickUpload}
+            className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition cursor-pointer"
+          >
+            Choose File
+          </button>
+
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+        </div>
 
         {successMessage && (
           <p className="text-green-600 font-medium">{successMessage}</p>
@@ -167,8 +176,6 @@ export default function ProfilePage() {
               placeholderText="your username"
             />
           </div>
-
-         
 
           <div>
             <label>Bio</label>
