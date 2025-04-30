@@ -13,6 +13,7 @@
     "bcrypt": "^5.1.1",
     "framer-motion": "^12.7.4",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.503.0",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
     "next": "15.3.0",

@@ -12,7 +12,7 @@ export default function Navbar() {
   if (loading || !token || !username) return null; // Don't render navbar until token is valid
 
   return (
-    <nav className="bg-white border-b border-gray-200 shadow-sm px-6 py-4">
+    <nav className="bg-white border-b border-gray-200 shadow-sm px-6 py-4 hidden sm:block">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="text-2xl font-bold text-indigo-600">DevLinkVault</div>
         <ul className="flex items-center gap-6 text-md text-gray-700">

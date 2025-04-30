@@ -106,7 +106,7 @@ export default function DashboardPage() {
             logout();
             router.push("/login");
           }}
-          className="bg-red-500 mt-6 px-4 py-2 text-white rounded-xl hover:bg-red-600"
+          className="bg-red-500 mt-6 px-4 py-2 text-white rounded-xl hover:bg-red-600 cursor-pointer"
         >
           Logout
         </button>

@@ -147,7 +147,7 @@ export default function ProfilePage() {
             <button
               type="button"
               onClick={handleClickUpload}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition cursor-pointer"
             >
               Choose File
             </button>
@@ -182,7 +182,7 @@ export default function ProfilePage() {
 
           <button
             type="submit"
-            className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
+            className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 cursor-pointer"
           >
             Save Changes
           </button>
