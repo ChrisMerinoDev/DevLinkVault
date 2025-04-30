@@ -33,8 +33,15 @@ export async function PUT(req: Request) {
     let avatarUrl = "";
 
     if (file) {
+      // ✅ Check file size before processing (limit: 30MB)
+      if (file.size > 30 * 1024 * 1024) {
+        return NextResponse.json({ error: "File too large (max 30MB)" }, { status: 413 });
+      }
+
+      // Convert file to buffer
       const buffer = Buffer.from(await file.arrayBuffer());
 
+      // Upload to Cloudinary using base64
       const base64Image = `data:${file.type};base64,${buffer.toString("base64")}`;
       const uploadResponse = await cloudinary.uploader.upload(base64Image, {
         folder: "devlinkvault_avatars",
