@@ -10,11 +10,19 @@ export default function RegisterPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const router = useRouter();
 
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (password.length < 6) {
+          setPasswordError("Password needs to be at least 6 characters long.");
+          return;
+        } else {
+          setPasswordError(""); // clears previous error if fixed.
+        }
 
         const res = await fetch("/api/auth/register", {
             method: "POST",
@@ -78,6 +86,9 @@ export default function RegisterPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            {passwordError && (
+              <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+            )}
           </div>
 
           <div className="flex space-x-2">
