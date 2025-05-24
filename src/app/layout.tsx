@@ -19,6 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "DevLinkVault",
   description: "A developer’s link manager and public profile app",
+  icons: {
+    icon: "/Link-Icon.svg"
+  }
 };
 
 export default function RootLayout({
