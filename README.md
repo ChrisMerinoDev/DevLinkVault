@@ -36,22 +36,48 @@
 
 ```
 .
+├── README.md
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public
+│   ├── dlv-preview.png
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
 ├── src
 │   ├── app
 │   │   ├── api
-│   │   ├── auth
 │   │   ├── dashboard
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── links
+│   │   ├── login
+│   │   ├── not-found.tsx
 │   │   ├── page.tsx
-│   │   └── links
+│   │   ├── register
+│   │   └── user
 │   ├── components
+│   │   └── ui
+│   ├── context
+│   │   └── AuthContext.tsx
 │   ├── lib
+│   │   ├── auth.ts
+│   │   ├── cloudinary.ts
+│   │   └── mongoose.ts
 │   ├── models
-│   └── types
-├── public
-├── styles
-├── .env.local.example
-├── next.config.js
-├── package.json
+│   │   ├── link.model.ts
+│   │   └── user.model.ts
+│   ├── types
+│   └── validators
+│       └── auth.ts
+├── structure.txt
 └── tsconfig.json
 ```
 
