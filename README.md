@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DevLinkVault 🧰
 
-## Getting Started
+**DevLinkVault** is a full-stack web application for developers to create and share customizable link profiles. Inspired by Linktree but focused on developers, users can organize their portfolio, GitHub, social links, and more in one beautiful, shareable page.
 
-First, run the development server:
+## 🌐 Live Demo
+
+👉 (https://dev-link-vault.vercel.app/)
+
+---
+
+## ⚙️ Features
+
+* 🔐 **User Authentication** — Secure login with JWT and cookies
+* 🧑‍💻 **Developer Profile Pages** — Custom user page with links, avatar, bio
+* ➕ **Add / Edit / Delete Links** — Full CRUD functionality for managing links
+* 🎨 **Responsive UI** — Built with **Tailwind CSS** and **ShadCN components**
+* 🗃️ **Full-Stack Integration** — Frontend (Next.js 14 App Router) + Backend (Express API + MongoDB)
+
+---
+
+## 🛠 Tech Stack
+
+| Frontend                | Backend           | Auth          | Styling               | Database           |
+| ----------------------- | ----------------- | ------------- | --------------------- | ------------------ |
+| Next.js 15 (App Router) | Node.js + Express | JWT + Cookies | Tailwind CSS + ShadCN | MongoDB + Mongoose |
+
+---
+
+## 📸 Preview
+
+![App Preview](public/dlv-preview.png)
+
+---
+
+## 📂 Project Structure
+
+```
+.
+├── src
+│   ├── app
+│   │   ├── api
+│   │   ├── auth
+│   │   ├── dashboard
+│   │   ├── page.tsx
+│   │   └── links
+│   ├── components
+│   ├── lib
+│   ├── models
+│   └── types
+├── public
+├── styles
+├── .env.local.example
+├── next.config.js
+├── package.json
+└── tsconfig.json
+```
+
+---
+
+## 🧪 How to Run Locally
+
+```bash
+git clone https://github.com/ChrisMerinoDev/devlinkvault.git
+cd devlinkvault
+npm install
+```
+
+Create a `.env.local` file:
+
+```env
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+```
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✅ Upcoming Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Profile themes and color customization
+* Public profile sharing with custom usernames
+* Analytics for link clicks and traffic
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📄 License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License © 2025 Chris Merino
