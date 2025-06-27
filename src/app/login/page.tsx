@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import SmartInput from "@/components/ui/smartInput";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ export default function LoginPage() {
       return;
     }
 
-    login(data.user, data.token); // ✅ updates global state
+    login(data.user, data.token); // updates global state
     router.push("/dashboard");
   };
 

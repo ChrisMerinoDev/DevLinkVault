@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import SmartInput from '../../components/ui/smartInput';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 export default function RegisterPage() {
     const [email, setEmail] = useState("");
@@ -39,6 +40,7 @@ export default function RegisterPage() {
 
         // Auto-login the user with a token if backend return one, more convenient for the user.
         localStorage.setItem("token", data.token);
+        toast.success('Account Created!')
         router.push("/dashboard")
     };
 

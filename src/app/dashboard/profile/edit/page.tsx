@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import SmartInput from "@/components/ui/smartInput";
+import toast from "react-hot-toast";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -106,7 +107,7 @@ export default function ProfilePage() {
 
     setAvatar(data.user.avatar); // final URL
     setAvatarFile(null);
-    setSuccessMessage("Profile updated successfully!");
+    toast.success("Profile updated successfully!");
 
     setTimeout(() => {
       setSuccessMessage("");

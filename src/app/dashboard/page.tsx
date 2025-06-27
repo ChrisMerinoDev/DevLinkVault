@@ -94,10 +94,9 @@ export default function DashboardPage() {
           <h2 className="text-xl font-semibold text-gray-700 mb-2">
             What do you want to do today?
           </h2>
-          <ul className="list-disc list-inside text-gray-600">
-            <li>Edit your profile</li>
-            <li>Manage your DevLinkVault links</li>
-            <li>Share your public page</li>
+          <ul className="list-disc list-inside text-blue-600">
+            <li><Link href={`/user/${user.username}`}>Edit your profile</Link></li>
+            <li><Link href='/links'>Manage your DevLinkVault links</Link></li>
           </ul>
         </div>
 

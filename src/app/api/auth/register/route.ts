@@ -9,6 +9,8 @@ export async function POST(req: Request) {
     const body = await req.json();
     const validated = RegisterSchema.safeParse(body);
 
+    
+    // Error Handling 
     if (!validated.success) {
       return NextResponse.json(
         { error: "Invalid input", issues: validated.error.flatten() },

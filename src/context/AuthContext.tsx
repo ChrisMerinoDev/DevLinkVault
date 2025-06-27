@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 type AuthContextType = {
   username: string | null;
@@ -60,6 +61,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem("user", JSON.stringify(user));
     setUsername(user.username);
     setToken(token);
+    toast.success('Login successful!')
   };
 
   const logout = () => {
@@ -67,6 +69,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.removeItem("user");
     setUsername(null);
     setToken(null);
+    toast.success('Logged out successfully!')
   };
 
   return (
