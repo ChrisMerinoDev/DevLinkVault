@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import SmartInput from "@/components/ui/smartInput";
 import Link from "next/link";
-import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
